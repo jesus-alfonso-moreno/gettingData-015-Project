@@ -1,10 +1,10 @@
-# Getting Data Project
 ---
 author: "Jesus Moreno"
 date: "06/18/2015"
 output: html_document
 ---
 
+# Getting Data Project
 
 This scripts performs the following steps in the same order:
 
