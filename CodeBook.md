@@ -1,8 +1,9 @@
-﻿---
-author: "Jesus Alfonso Moreno"
-date: "21 de junio de 2015"
+---
+author: "Jesus Moreno"
+date: "06/21/2015"
 output: html_document
 ---
+
 # CodeBook
 
 ## Background

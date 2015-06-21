@@ -8,8 +8,9 @@
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 <meta name="generator" content="pandoc" />
 
-<meta name="author" content="Jesus Alfonso Moreno" />
+<meta name="author" content="Jesus Moreno" />
 
+<meta name="date" content="2015-06-21" />
 
 <title></title>
 
@@ -64,8 +65,8 @@ img {
 
 <div id="codebook" class="section level1">
 <h1>CodeBook</h1>
-<div id="backgroup" class="section level2">
-<h2>Backgroup</h2>
+<div id="background" class="section level2">
+<h2>Background</h2>
 <p>The analysis performed in this project uses data from the <strong>Human Activity Recognition Using Smartphones Data Set</strong> study. The original research consisted of logging human activity data with the sensors of a Samsung Galaxy S2 smartphone. Such sensors are an accelerometer and gyroscope. The original data contains about 543 varialbes, but only a subset of such readings and estimates are used in this project.</p>
 <p>To learn more about the experiments visit: <a href="http://archive.ics.uci.edu/ml/datasets/Human+Activity+Recognition+Using+Smartphones" class="uri">http://archive.ics.uci.edu/ml/datasets/Human+Activity+Recognition+Using+Smartphones</a></p>
 <p>To download the original data: <a href="https://d396qusza40orc.cloudfront.net/getdata%2Fprojectfiles%2FUCI%20HAR%20Dataset.zip">https://d396qusza40orc.cloudfront.net/getdata%2Fprojectfiles%2FUCI%20HAR%20Dataset.zip</a></p>
@@ -91,7 +92,7 @@ img {
 -fBodyGyroMag
 -fBodyGyroJerkMag</code></pre>
 <p><em>Note: It is known that such list of signals where extracted with several methods from the raw data of the two sensors.</em></p>
-<p>In consequence only the mean and standard deviation of such listed signals where extracted. Estimations that included the word mean, but really were a different estimation on its own (and not a mean/standard deviation calculation) where ignored. For example “fBodyAcc-meanFreq()-X” or “angle(tBodyAccJerkMean),gravityMean)”. In general the following estimations where ignored:</p>
+<p>In consequence only the mean and standard deviation of such listed signals where extracted. Estimations that included the word mean, but really were a different estimation on its own (and not a mean/standard deviation calculation) where ignored. For example âfBodyAcc-meanFreq()-Xâ or âangle(tBodyAccJerkMean),gravityMean)â. In general the following estimations where ignored:</p>
 <pre><code>-mad(): Median absolute deviation 
 -max(): Largest value in array
 -min(): Smallest value in array
@@ -110,7 +111,7 @@ img {
 </div>
 <div id="creating-descriptive-variable-names" class="section level2">
 <h2>Creating descriptive variable names</h2>
-<p>Based on the “features.txt” file of the original data, which lists the complete list of columns names, more complete labels were created. The proposed new names have the following structure with each section englobed by squared brackets and separated by “_”: <strong>[Signal Domain Type]</strong>_<strong>[Source Of Movement (Body or Gravity)]</strong>_<strong>[Sensor Name (Accelerometer or Gyroscope)]</strong>_<strong>[Jerk Measurement Flag (if it applies)]</strong>_<strong>[Axis name or Magnitude Flag]</strong>_<strong>[Estimation Name (Mean or Standar Deviation)]</strong>. So for example “tBodyAcc-mean()-X” becomes “time_BodyMotion_Accelerometer_Xaxis_Mean”</p>
+<p>Based on the âfeatures.txtâ file of the original data, which lists the complete list of columns names, more complete labels were created. The proposed new names have the following structure with each section englobed by squared brackets and separated by â_â: <strong>[Signal Domain Type]</strong>_<strong>[Source Of Movement (Body or Gravity)]</strong>_<strong>[Sensor Name (Accelerometer or Gyroscope)]</strong>_<strong>[Jerk Measurement Flag (if it applies)]</strong>_<strong>[Axis name or Magnitude Flag]</strong>_<strong>[Estimation Name (Mean or Standar Deviation)]</strong>. So for example âtBodyAcc-mean()-Xâ becomes âtime_BodyMotion_Accelerometer_Xaxis_Meanâ</p>
 <p><strong>Why is this descriptive?</strong> Because even though working with these signals and filtering them requires advanced mathematics and physics knowledge, any person who reads this document will know at least:</p>
 <ol style="list-style-type: decimal">
 <li>Type/Source of movement</li>
