@@ -1,11 +1,11 @@
----
+﻿---
 author: "Jesus Alfonso Moreno"
 date: "21 de junio de 2015"
 output: html_document
 ---
 # CodeBook
 
-## Backgroup
+## Background
 
 The analysis performed in this project uses data from the **Human Activity Recognition Using Smartphones Data Set** study. The original research consisted of logging human activity data with the sensors of a Samsung Galaxy S2 smartphone. Such sensors are an accelerometer and gyroscope. The original data contains about 543 varialbes, but only a subset of such readings and estimates are used in this project.
 
