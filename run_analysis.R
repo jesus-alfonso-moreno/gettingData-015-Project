@@ -77,7 +77,7 @@ main = function(){ #main function, where the magic happens
   dfmComplete = melt(complete,id=c("Activities_Label","Subjects_ID"),measure.vars = vValuesCol)
   dfcComplete = dcast(dfmComplete, Activities_Label + Subjects_ID ~ variable,mean)
   #writes table to dir
-  write.table(dfcComplete,file = "reshapedDataActivitiesSubjects",row.names = F,sep="|")
+  write.table(dfcComplete,file = "reshapedDataActivitiesSubjects.txt",row.names = F,sep="|")
   print("Script finished")
 }
 
