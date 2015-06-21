@@ -49,13 +49,13 @@ The third data load is the subject list of each case. This data can be found in 
 then the scripts load the data set containing activities descriptions. Since both test and train data share the same codes, one data load will sufice this time. 
 
 
-### concatenating and mergingtables
+### Concatenating and Merging tables
 
 The following concatenation procedures are performed in the order presented:
 
 1. X Train Data Frame, with Subjects ID Table and Activities ID table (columns wise). The resulting data frame is named **train**.
 2. X Test Data Frame, with Test Subjects ID Table and Test Activities ID table (columns wise). The resulting data frame is named **test**.
-3. Concatenate **train and test** dataframes, rows wise. The resulting data framed is named **complete**
+3. Concatenate **train and test** data frames, rows wise. The resulting data frame is named **complete**
 4. Merge **complete** data frame with the activities label data frame, by activities id column.
 
 ### Removing unwanted columns
@@ -67,7 +67,7 @@ All unneeded columns are removed, leaving only 66 variables.
 
 The reshape function is used. This involves 3 steps:
 
-1. Identifying all numerical variables (non label/ID columns. To simplify the process when loading the data, all non key columns where assigned a double class. While key columns where assigned a character or integer class. The class serves as a flag to discriminate variables. The following code is used to create a vector with column's name that contain amounts:
+1. Identifying all numerical variables (non label/ID columns). To simplify the process when loading the data, all non key columns where assigned a double class. While key columns where assigned a character or integer class. In consequence, the class serves as a flag to discriminate variables. The following code is used to create a vector with column's name that contain amounts:
 
 
 ```{r}

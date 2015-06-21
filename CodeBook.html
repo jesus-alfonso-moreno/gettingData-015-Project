@@ -8,9 +8,8 @@
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 <meta name="generator" content="pandoc" />
 
-<meta name="author" content="Jesus Moreno" />
+<meta name="author" content="Jesus Alfonso Moreno" />
 
-<meta name="date" content="2015-06-18" />
 
 <title></title>
 
@@ -63,70 +62,73 @@ img {
 
 
 
-<div id="getting-data-project" class="section level1">
-<h1>Getting Data Project</h1>
-<div id="introduction" class="section level2">
-<h2>Introduction</h2>
-<p>The script in general performs the following steps:</p>
+<div id="codebook" class="section level1">
+<h1>CodeBook</h1>
+<div id="backgroup" class="section level2">
+<h2>Backgroup</h2>
+<p>The analysis performed in this project uses data from the <strong>Human Activity Recognition Using Smartphones Data Set</strong> study. The original research consisted of logging human activity data with the sensors of a Samsung Galaxy S2 smartphone. Such sensors are an accelerometer and gyroscope. The original data contains about 543 varialbes, but only a subset of such readings and estimates are used in this project.</p>
+<p>To learn more about the experiments visit: <a href="http://archive.ics.uci.edu/ml/datasets/Human+Activity+Recognition+Using+Smartphones" class="uri">http://archive.ics.uci.edu/ml/datasets/Human+Activity+Recognition+Using+Smartphones</a></p>
+<p>To download the original data: <a href="https://d396qusza40orc.cloudfront.net/getdata%2Fprojectfiles%2FUCI%20HAR%20Dataset.zip">https://d396qusza40orc.cloudfront.net/getdata%2Fprojectfiles%2FUCI%20HAR%20Dataset.zip</a></p>
+</div>
+<div id="extracting-measurements-on-the-mean-and-standard-deviation-for-each-measurement" class="section level2">
+<h2>Extracting measurements on the mean and standard deviation for each measurement</h2>
+<p>For the purpose of this project it is assumed that the measurements are:</p>
+<pre><code>-tBodyAcc-XYZ
+-tGravityAcc-XYZ
+-tBodyAccJerk-XYZ
+-tBodyGyro-XYZ
+-tBodyGyroJerk-XYZ
+-tBodyAccMag
+-tGravityAccMag
+-tBodyAccJerkMag
+-tBodyGyroMag
+-tBodyGyroJerkMag
+-fBodyAcc-XYZ
+-fBodyAccJerk-XYZ
+-fBodyGyro-XYZ
+-fBodyAccMag
+-fBodyAccJerkMag
+-fBodyGyroMag
+-fBodyGyroJerkMag</code></pre>
+<p><em>Note: It is known that such list of signals where extracted with several methods from the raw data of the two sensors.</em></p>
+<p>In consequence only the mean and standard deviation of such listed signals where extracted. Estimations that included the word mean, but really were a different estimation on its own (and not a mean/standard deviation calculation) where ignored. For example “fBodyAcc-meanFreq()-X” or “angle(tBodyAccJerkMean),gravityMean)”. In general the following estimations where ignored:</p>
+<pre><code>-mad(): Median absolute deviation 
+-max(): Largest value in array
+-min(): Smallest value in array
+-sma(): Signal magnitude area
+-energy(): Energy measure. Sum of the squares divided by the number of values. 
+-iqr(): Interquartile range 
+-entropy(): Signal entropy
+-arCoeff(): Autorregresion coefficients with Burg order equal to 4
+-correlation(): correlation coefficient between two signals
+-maxInds(): index of the frequency component with largest magnitude
+-meanFreq(): Weighted average of the frequency components to obtain a mean frequency
+-skewness(): skewness of the frequency domain signal 
+-kurtosis(): kurtosis of the frequency domain signal 
+-bandsEnergy(): Energy of a frequency interval within the 64 bins of the FFT of each window.
+-angle(): Angle between to vectors.</code></pre>
+</div>
+<div id="creating-descriptive-variable-names" class="section level2">
+<h2>Creating descriptive variable names</h2>
+<p>Based on the “features.txt” file of the original data, which lists the complete list of columns names, more complete labels were created. The proposed new names have the following structure with each section englobed by squared brackets and separated by “_”: <strong>[Signal Domain Type]</strong>_<strong>[Source Of Movement (Body or Gravity)]</strong>_<strong>[Sensor Name (Accelerometer or Gyroscope)]</strong>_<strong>[Jerk Measurement Flag (if it applies)]</strong>_<strong>[Axis name or Magnitude Flag]</strong>_<strong>[Estimation Name (Mean or Standar Deviation)]</strong>. So for example “tBodyAcc-mean()-X” becomes “time_BodyMotion_Accelerometer_Xaxis_Mean”</p>
+<p><strong>Why is this descriptive?</strong> Because even though working with these signals and filtering them requires advanced mathematics and physics knowledge, any person who reads this document will know at least:</p>
 <ol style="list-style-type: decimal">
-<li>Merges the training and the test sets to create one data set.</li>
-<li>Extracts only the measurements on the mean and standard deviation for each measurement.</li>
-<li>Uses descriptive activity names to name the activities in the data set</li>
-<li>Appropriately labels the data set with descriptive variable names.</li>
-<li>From the data set in step 4, creates a second, independent tidy data set with the average of each variable for each activity and each subject.</li>
+<li>Type/Source of movement</li>
+<li>Domain of the variable (frequency or time)</li>
+<li>Source of readings (sensor’s name)</li>
+<li>If it’s the magnitude of the vector or an Axis</li>
+<li>Estimation type (mean or standard deviation)</li>
 </ol>
-<p>As indicated in the project instructions for Coursera’s Getting and Cleaning Data cousera.</p>
+<p>It’s also expected that a Data Scientist working with a data set with such descriptions will have a better change of recalling the use of each variable.</p>
 </div>
-<div id="prerequisites-for-running-the-scripts" class="section level2">
-<h2>Prerequisites for running the scripts</h2>
-<p>In order to properly run the script, ensure that the following file is unzipped in the R working directory of the session: <a href="https://d396qusza40orc.cloudfront.net/getdata%2Fprojectfiles%2FUCI%20HAR%20Dataset.zip">https://d396qusza40orc.cloudfront.net/getdata%2Fprojectfiles%2FUCI%20HAR%20Dataset.zip</a></p>
-<p>If there’s an internet connection available, the script will try to download the zipped file. Else ensure that the proper file is in the root of the working directiry.</p>
-<p>Also the script uses the reshape2 library. If unavailable use the following code to install:</p>
-<pre class="{r}"><code>install.packages(&quot;reshape2&quot;,dependencies = c(&quot;Depends&quot;, &quot;Imports&quot;, &quot;LinkingTo&quot;, &quot;Suggests&quot;, &quot;Enhances&quot;))</code></pre>
-<p>Last but not least, R must installed in order to run the code.</p>
-</div>
-<div id="analysis" class="section level2">
-<h2>Analysis</h2>
-<div id="loading-x-and-y-data-sets-for-train-and-test-data" class="section level3">
-<h3>Loading X and Y data sets for train and test data</h3>
-<p>The former link contains Test and Train data sets for a machine learning research project, using cellphone’s sensors to identify the activities performed by the test subjects. The first step involves loading both X (independent variables) data sets into two data frames.</p>
-<p>Since both data sets lack a header row with column names, the script is hardcoded to provide such variable labels when loading both tables. Columns names are based on the “features.txt”, which is insde the “UCI HAR Dataset” folder. Also while loading the data sets, unwated columns are discarted.</p>
-<p>The second step involves loading the train and test Y data sets. Both Y data sets contain a vector with the activities ID performed by the subjects. Each row of the vector corresponds to the same row of the X dataframe.</p>
-<p>The third data load is the subject list of each case. This data can be found in the “subject_test.txt” file of each data case. The file contains a vector with subject’s ID, since no descriptions are needed it will be fine as it is.</p>
-<p>then the scripts load the data set containing activities descriptions. Since both test and train data share the same codes, one data load will sufice this time.</p>
-</div>
-<div id="concatenating-and-merging-tables" class="section level3">
-<h3>Concatenating and Merging tables</h3>
-<p>The following concatenation procedures are performed in the order presented:</p>
+<div id="units" class="section level2">
+<h2>Units</h2>
+<p>The units assigned to each of the measurements are not mentioned in the original codebook. But it’s expected that gyroscope readings are in some form of angular velocity, while accelerometer readings are expected to be in a form of acceleration unit. The same logic applies to Jerk derivations.</p>
+<p>Another point to keep in mind is that at the beginning of each variable name the domain type is indicated. The two known cases of this data set are:</p>
 <ol style="list-style-type: decimal">
-<li>X Train Data Frame, with Subjects ID Table and Activities ID table (columns wise). The resulting data frame is named <strong>train</strong>.</li>
-<li>X Test Data Frame, with Test Subjects ID Table and Test Activities ID table (columns wise). The resulting data frame is named <strong>test</strong>.</li>
-<li>Concatenate <strong>train and test</strong> data frames, rows wise. The resulting data frame is named <strong>complete</strong></li>
-<li>Merge <strong>complete</strong> data frame with the activities label data frame, by activities id column.</li>
+<li>Time domain</li>
+<li>Frequency domain</li>
 </ol>
-</div>
-<div id="removing-unwanted-columns" class="section level3">
-<h3>Removing unwanted columns</h3>
-<p>All unneeded columns are removed, leaving only 66 variables.</p>
-</div>
-<div id="groupingpivoting-data" class="section level3">
-<h3>Grouping/pivoting data</h3>
-<p>The reshape function is used. This involves 3 steps:</p>
-<ol style="list-style-type: decimal">
-<li>Identifying all numerical variables (non label/ID columns). To simplify the process when loading the data, all non key columns where assigned a double class. While key columns where assigned a character or integer class. In consequence, the class serves as a flag to discriminate variables. The following code is used to create a vector with column’s name that contain amounts:</li>
-</ol>
-<pre class="{r}"><code>vValuesCol = names(complete[,sapply(complete, is.double)])</code></pre>
-<ol start="2" style="list-style-type: decimal">
-<li>Defining an intermediate data frame to enable grouping. Reshape2 library contains the melt function which outputs a DF with a clear distinction between ID variables and amount columns. The following code was used:</li>
-</ol>
-<pre class="{r}"><code>dfmComplete = melt(complete,id=c(&quot;Activities_Label&quot;,&quot;Subjects_ID&quot;),measure.vars = vValuesCol)</code></pre>
-<ol start="3" style="list-style-type: decimal">
-<li>Defining the resulting group table, by using Reshape2’s dcast function:</li>
-</ol>
-<pre class="{r}"><code>dfcComplete = dcast(dfmComplete, Activities_Label + Subjects_ID ~ variable,mean)</code></pre>
-<p>Last but not least the dfcComplete table is saved in the working directory, using pipes “|” seperators:</p>
-<pre class="{r}"><code>write.table(dfcComplete,file = &quot;reshapedDataActivitiesSubjects&quot;,row.names = F,sep=&quot;|&quot;)</code></pre>
-</div>
 </div>
 </div>
 
